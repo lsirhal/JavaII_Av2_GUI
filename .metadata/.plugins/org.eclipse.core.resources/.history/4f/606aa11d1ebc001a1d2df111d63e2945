@@ -1,0 +1,82 @@
+package view;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
+import controller.BuscarID;
+import model.Contato;
+
+public class BuscarRegistros extends JFrame {
+
+	private JPanel contentPane;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					BuscarRegistros frame = new BuscarRegistros();
+					frame.setVisible(true);
+					frame.setLocationRelativeTo(null);
+					frame.setResizable(false);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public BuscarRegistros() {
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 543, 291);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
+		setContentPane(contentPane);
+		
+		contentPane.setLayout(null);
+		contentPane.setLayout(null);
+		contentPane.setLayout(null);
+		contentPane.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Buscar Registros");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblNewLabel.setBounds(146, 22, 242, 61);
+		contentPane.add(lblNewLabel);
+		
+		JButton btnDeletar = new JButton("Buscar");
+		btnDeletar.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnDeletar.setBounds(191, 186, 115, 36);
+		contentPane.add(btnDeletar);
+		
+		JLabel lblNewLabel_4 = new JLabel("Digite o ID:");
+		lblNewLabel_4.setBounds(10, 111, 72, 14);
+		contentPane.add(lblNewLabel_4);
+		
+		btnDeletar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				System.out.println("OLÁ");
+			
+			}
+		});
+		
+	}
+
+}

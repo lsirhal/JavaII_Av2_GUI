@@ -1,0 +1,100 @@
+package controller;
+
+import java.awt.Font;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
+import model.Contato;
+
+public class BuscarRegistros {
+	
+	private static JPanel contentPane;
+	private JScrollPane scrollAutor;  // declara a rolagem
+	private static DefaultTableModel modelo; // declara o modelo da tabela
+	private static JTable tabela; // declara a tabela
+	
+	public static void main(String[] args) {
+		
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("contatos");
+		EntityManager manager = factory.createEntityManager();
+		
+		String sql = "From model.Contato";
+		
+		Query query = manager.createQuery(sql);
+	        
+		List<Contato> Lista = query.getResultList();
+		
+		for (Contato c : Lista) {
+			System.out.println("ID: " + c.getId());
+			System.out.println("Nome: " + c.getNome());
+			System.out.println("Nome: " + c.getEmail() + "\n");
+		}
+		
+		manager.close();
+	}
+	
+	public static void listarRegistros() {
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("contatos");
+		EntityManager manager = factory.createEntityManager();
+		
+		String sql = "From model.Contato";
+		
+		Query query = manager.createQuery(sql);
+	        
+		List<Contato> Lista = query.getResultList();
+		
+		for (Contato c : Lista) {
+			
+			System.out.println("ID: " + c.getId());
+			System.out.println("Nome: " + c.getNome());
+			System.out.println("Email: " + c.getEmail());
+			System.out.println("Endereço: " + c.getEndereco());
+			System.out.println("\n");
+			
+		}
+		
+		//JOptionPane.showMessageDialog(null, "Registro encontrado!" + "\n" + "Nome: " + c.getNome() + "\n" + "Email: " + c.getEmail() + "\n" + "Endereço: " + c.getEmail(), null, 1);
+		
+		JFrame frame = new JFrame();
+		
+		frame.setVisible(true);
+		frame.setLocationRelativeTo(null);
+		frame.setResizable(false);
+		
+		frame.setTitle("Listas de registros - Contatos 1.0");
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setBounds(100, 100, 543, 291);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		frame.setContentPane(contentPane);
+		
+		contentPane.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Listas de Registros");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblNewLabel.setBounds(155, 22, 242, 61);
+		contentPane.add(lblNewLabel);
+		
+		//instacia o modelo da tabela e adiciona as colunas da tabela
+		modelo = new DefaultTableModel();
+		modelo.addColumn("Codigo");
+		modelo.addColumn("Nome");
+		modelo.addColumn("E-mail");
+		modelo.addColumn("Tipo de Escrita");
+		
+		manager.close();
+	}
+	
+}

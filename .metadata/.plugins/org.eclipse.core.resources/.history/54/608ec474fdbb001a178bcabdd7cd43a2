@@ -1,0 +1,93 @@
+package view;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
+import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+public class JanelaPrincipal {
+
+	private JFrame frame;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					JanelaPrincipal window = new JanelaPrincipal();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public JanelaPrincipal() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 450, 300);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		JMenuBar menuBar = new JMenuBar();
+		frame.setJMenuBar(menuBar);
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Casdastrar Contato");
+		menuBar.add(mntmNewMenuItem);
+		
+		JMenuItem mntmNewMenuItem_1 = new JMenuItem("New menu item");
+		menuBar.add(mntmNewMenuItem_1);
+		
+		JMenuBar menuBar_1 = new JMenuBar();
+		menuBar.add(menuBar_1);
+		
+		JPopupMenu popupMenu = new JPopupMenu();
+		addPopup(frame.getContentPane(), popupMenu);
+		
+		JMenuItem mntmNewMenuItem_3 = new JMenuItem("New menu item");
+		popupMenu.add(mntmNewMenuItem_3);
+		
+		JMenuItem mntmNewMenuItem_5 = new JMenuItem("New menu item");
+		popupMenu.add(mntmNewMenuItem_5);
+		
+		JMenuItem mntmNewMenuItem_4 = new JMenuItem("New menu item");
+		popupMenu.add(mntmNewMenuItem_4);
+		
+		JMenuItem mntmNewMenuItem_2 = new JMenuItem("New menu item");
+		popupMenu.add(mntmNewMenuItem_2);
+	}
+
+	private static void addPopup(Component component, final JPopupMenu popup) {
+		component.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
+	}
+}

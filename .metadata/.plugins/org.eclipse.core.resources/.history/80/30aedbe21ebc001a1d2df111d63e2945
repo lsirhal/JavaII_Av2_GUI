@@ -1,0 +1,100 @@
+package view;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
+import controller.BuscarID;
+import model.Contato;
+import javax.swing.JTable;
+
+public class BuscarRegistros extends JFrame {
+
+	private JPanel contentPane;
+	private JTable table;
+	private JScrollPane scroll;  
+	private DefaultTableModel modelo; 
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					BuscarRegistros frame = new BuscarRegistros();
+					frame.setVisible(true);
+					frame.setLocationRelativeTo(null);
+					frame.setResizable(false);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public BuscarRegistros() {
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 543, 346);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		
+		contentPane.setLayout(null);
+		contentPane.setLayout(null);
+		contentPane.setLayout(null);
+		contentPane.setLayout(null);
+		contentPane.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Buscar Registros");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblNewLabel.setBounds(146, 22, 242, 61);
+		contentPane.add(lblNewLabel);
+		
+		JButton btnDeletar = new JButton("Buscar");
+		btnDeletar.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnDeletar.setBounds(190, 94, 115, 36);
+		contentPane.add(btnDeletar);
+		
+		modelo = new DefaultTableModel();
+		modelo.addColumn("Codigo");
+		modelo.addColumn("Nome");
+		modelo.addColumn("Email");
+		modelo.addColumn("Endereço");
+		
+		table = new JTable(modelo);
+		table.getColumnModel().getColumn(0).setPreferredWidth(40);
+		
+		scroll = new JScrollPane(table);
+		scroll.setBounds(22, 163, 482, 113);
+		contentPane.add(scroll);
+		
+		
+		table.setBounds(22, 163, 482, 113);
+		contentPane.add(table);
+		
+		btnDeletar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				System.out.println("OLÁ");
+			
+			}
+		});
+		
+	}
+}

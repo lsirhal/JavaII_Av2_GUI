@@ -1,0 +1,129 @@
+package view;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
+import controller.Atualizar;
+import controller.Cadastrar;
+import model.Contato;
+
+public class AtualizarContato extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField textFieldNome;
+	private JTextField textFieldEmail;
+	private JTextField textFieldEnd;
+	private JTextField textFieldID;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					AtualizarContato frame = new AtualizarContato();
+					frame.setVisible(true);
+					frame.setLocationRelativeTo(null);
+					frame.setResizable(false);
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public AtualizarContato() {
+		setTitle("Atualizar Contato - Contatos 1.0");
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 543, 392);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		contentPane.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Atualizar contato");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblNewLabel.setBounds(146, 22, 242, 61);
+		contentPane.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("Nome:");
+		lblNewLabel_1.setBounds(10, 150, 46, 14);
+		contentPane.add(lblNewLabel_1);
+		
+		textFieldNome = new JTextField();
+		textFieldNome.setBounds(58, 147, 442, 20);
+		contentPane.add(textFieldNome);
+		textFieldNome.setColumns(10);
+		
+		JLabel lblNewLabel_2 = new JLabel("Email:");
+		lblNewLabel_2.setBounds(10, 194, 46, 14);
+		contentPane.add(lblNewLabel_2);
+		
+		textFieldEmail = new JTextField();
+		textFieldEmail.setBounds(58, 191, 442, 20);
+		contentPane.add(textFieldEmail);
+		textFieldEmail.setColumns(10);
+		
+		JLabel lblNewLabel_3 = new JLabel("Endere\u00E7o:");
+		lblNewLabel_3.setBounds(10, 240, 58, 14);
+		contentPane.add(lblNewLabel_3);
+		
+		textFieldEnd = new JTextField();
+		textFieldEnd.setBounds(78, 237, 422, 20);
+		contentPane.add(textFieldEnd);
+		textFieldEnd.setColumns(10);
+		
+		JButton btnAtualizar = new JButton("Atualizar");
+		btnAtualizar.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnAtualizar.setBounds(200, 278, 115, 36);
+		contentPane.add(btnAtualizar);
+		
+		JLabel lblNewLabel_4 = new JLabel("Digite o ID:");
+		lblNewLabel_4.setBounds(10, 111, 58, 14);
+		contentPane.add(lblNewLabel_4);
+		
+		textFieldID = new JTextField();
+		textFieldID.setBounds(73, 108, 86, 20);
+		contentPane.add(textFieldID);
+		textFieldID.setColumns(10);
+		
+		btnAtualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				String nome = textFieldNome.getText();
+				String email = textFieldEmail.getText();
+				String end = textFieldEnd.getText();
+				
+				Contato contato = new Contato();
+				
+				contato.setNome(nome);
+				contato.setEmail(email);
+				contato.setEndereco(end);
+				
+				Atualizar.atualizarContato(contato);
+				JOptionPane.showMessageDialog(null, "Contato " + nome + " atualizado com sucesso!", end, 1);
+				
+			}
+		});
+		
+		
+	}
+}

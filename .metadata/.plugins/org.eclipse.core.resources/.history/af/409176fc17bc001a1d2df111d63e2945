@@ -1,0 +1,186 @@
+package view;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
+import model.Contato;
+
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.SwingConstants;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JComboBox;
+
+public class AutorGUI extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField campo_Codigo;
+	private JTextField campo_Nome;
+	private JTextField campo_Email;
+	private JComboBox cbTpEscrita;
+	
+	private JLabel lblCadastroAutor, lblNome, lblCodigo, lblEmail, lblTpEscrita;
+	private JButton btnLimpar, btnCadastrar; 
+	private JScrollPane scrollAutor;
+	private DefaultTableModel modelo;
+	private JTable tabela;
+	
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					AutorGUI frame = new AutorGUI();
+					frame.setLocationRelativeTo(null);
+					frame.setResizable(false);
+					frame.setVisible(true);
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	
+	public void adicionarOuvinte(ActionListener ouvinte){
+		btnCadastrar.addActionListener(ouvinte);
+		btnLimpar.addActionListener(ouvinte);
+	}
+	
+	public AutorGUI() {
+		Contato contato = new Contato();
+		
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 416);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		lblCadastroAutor = new JLabel("CADASTRO DE AUTOR");
+		lblCadastroAutor.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCadastroAutor.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblCadastroAutor.setBounds(118, 11, 237, 40);
+		contentPane.add(lblCadastroAutor);
+		
+		lblNome = new JLabel("NOME:");
+		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNome.setBounds(41, 106, 68, 24);
+		contentPane.add(lblNome);
+		
+		lblCodigo = new JLabel("C\u00D3DIGO:");
+		lblCodigo.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblCodigo.setBounds(41, 71, 68, 24);
+		contentPane.add(lblCodigo);
+		
+		lblEmail = new JLabel("E-MAIL:");
+		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblEmail.setBounds(41, 141, 68, 24);
+		contentPane.add(lblEmail);
+		
+		lblTpEscrita = new JLabel("TIPO ESCRITA:");
+		lblTpEscrita.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblTpEscrita.setBounds(41, 176, 95, 24);
+		contentPane.add(lblTpEscrita);
+		
+		campo_Codigo = new JTextField();
+		campo_Codigo.setBounds(149, 75, 206, 20);
+		contentPane.add(campo_Codigo);
+		campo_Codigo.setColumns(10);
+		
+		//String id = campo_Codigo.getText();
+		//Long id_long = Long.parseLong(id);
+		//contato.setId(id_long);
+		
+		
+		campo_Nome = new JTextField();
+		campo_Nome.setColumns(10);
+		campo_Nome.setBounds(149, 110, 206, 20);
+		contentPane.add(campo_Nome);
+		
+		String nome = campo_Nome.getText();
+		contato.setNome(nome);
+		
+		campo_Email = new JTextField();
+		campo_Email.setColumns(10);
+		campo_Email.setBounds(149, 145, 206, 20);
+		contentPane.add(campo_Email);
+		
+		String email = campo_Email.getText();
+		contato.setEmail(email);
+		
+		btnLimpar = new JButton("LIMPAR");
+		btnLimpar.setBounds(81, 227, 89, 23);
+		contentPane.add(btnLimpar);
+		
+		btnCadastrar = new JButton("CADASTRAR");
+		btnCadastrar.setBounds(235, 227, 120, 23);
+		contentPane.add(btnCadastrar);
+		
+		btnCadastrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				System.out.println("ACAO CADASTRAR");
+			}
+		});
+		
+		modelo = new DefaultTableModel();
+		modelo.addColumn("Codigo");
+		modelo.addColumn("Nome");
+		modelo.addColumn("E-mail");
+		modelo.addColumn("Tipo de Escrita");
+		
+		tabela = new JTable(modelo);
+		
+		tabela.getColumnModel().getColumn(0).setPreferredWidth(40);
+		
+		scrollAutor = new JScrollPane(tabela);
+		scrollAutor.setBounds(28, 261, 361, 100);
+		contentPane.add(scrollAutor);
+		
+		cbTpEscrita = new JComboBox();
+		cbTpEscrita.setBounds(146, 176, 209, 24);
+		contentPane.add(cbTpEscrita);
+		scrollAutor.setVisible(false);
+		
+		cbTpEscrita.addItem("");
+		cbTpEscrita.addItem("Literatura Infantil");
+		cbTpEscrita.addItem("Literatura Juvenil");
+		cbTpEscrita.addItem("Literatura Adulto");
+		
+		
+		
+		setLocationRelativeTo(null);
+		setResizable(false); 
+		setVisible(true);
+		
+		contato.setId(1L);
+		contato.setNome("Fernando");
+		contato.setEmail("contato@fernandocamilo.com");
+		contato.setEndereco("Rua X");
+	}
+
+	public void adicionaJTable(Contato a) {
+		Object[] contato = {a.getId(), a.getNome(), a.getEmail(), a.getEndereco()};
+		modelo.addRow(contato);
+	}
+
+	public void habilitaScroll() {
+		scrollAutor.setVisible(true);
+		
+	}
+}

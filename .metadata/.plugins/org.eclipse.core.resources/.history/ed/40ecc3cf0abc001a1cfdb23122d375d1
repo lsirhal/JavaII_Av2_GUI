@@ -1,0 +1,140 @@
+package view;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import controller.Cadastrar;
+import model.Contato;
+
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JTextField;
+import javax.swing.JButton;
+
+public class CadastrarContato extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField textFieldNome;
+	private JTextField textFieldEmail;
+	private JTextField textFieldEnd;
+	
+	static CadastrarContato frame; 
+	
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					frame = new CadastrarContato();
+					frame.setVisible(true);
+					frame.setLocationRelativeTo(null);
+					frame.setResizable(false);
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public CadastrarContato() {
+		setTitle("Cadastrar Contato - Contatos 1.0");
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 543, 392);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Cadastrar contato");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblNewLabel.setBounds(146, 22, 242, 61);
+		contentPane.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("Nome:");
+		lblNewLabel_1.setBounds(21, 114, 46, 14);
+		contentPane.add(lblNewLabel_1);
+		
+		textFieldNome = new JTextField();
+		textFieldNome.setBounds(69, 111, 442, 20);
+		contentPane.add(textFieldNome);
+		textFieldNome.setColumns(10);
+		
+		JLabel lblNewLabel_2 = new JLabel("Email:");
+		lblNewLabel_2.setBounds(21, 158, 46, 14);
+		contentPane.add(lblNewLabel_2);
+		
+		textFieldEmail = new JTextField();
+		textFieldEmail.setBounds(69, 155, 442, 20);
+		contentPane.add(textFieldEmail);
+		textFieldEmail.setColumns(10);
+		
+		JLabel lblNewLabel_3 = new JLabel("Endere\u00E7o:");
+		lblNewLabel_3.setBounds(21, 204, 58, 14);
+		contentPane.add(lblNewLabel_3);
+		
+		textFieldEnd = new JTextField();
+		textFieldEnd.setBounds(89, 201, 422, 20);
+		contentPane.add(textFieldEnd);
+		textFieldEnd.setColumns(10);
+		
+		JButton btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnCadastrar.setBounds(304, 278, 115, 36);
+		contentPane.add(btnCadastrar);
+		
+		btnCadastrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				String nome = textFieldNome.getText();
+				String email = textFieldEmail.getText();
+				String end = textFieldEnd.getText();
+				
+				Contato contato = new Contato();
+				
+				contato.setNome(nome);
+				contato.setEmail(email);
+				contato.setEndereco(end);
+				
+				Cadastrar.cadastrarContato(contato);
+				JOptionPane.showMessageDialog(null, "Contato " + nome + " cadastrado com sucesso!", end, 1);
+				
+			}
+		});
+		
+		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnVoltar.setBounds(130, 278, 115, 36);
+		
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				frame.dispose();
+				
+				Principal principal = new Principal();
+				principal.setVisible(true);
+				principal.setLocationRelativeTo(null);
+				principal.setResizable(false);
+				principal.setVisible(true);
+			}
+			
+		});
+		
+		contentPane.add(btnVoltar);
+	}
+}
